@@ -1,4 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using DigitalLibraryAPI.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<DigitalLibraryAPIContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DigitalLibraryAPIContext") ?? throw new InvalidOperationException("Connection string 'DigitalLibraryAPIContext' not found.")));
 
 // Add services to the container.
 
