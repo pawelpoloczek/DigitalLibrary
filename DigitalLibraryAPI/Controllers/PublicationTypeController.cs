@@ -93,7 +93,7 @@ namespace DigitalLibraryAPI.Controllers
             _context.Type.Add(publicationType);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPublicationType", new { id = publicationType.Id }, publicationType);
+            return Ok(publicationType);
         }
 
         // DELETE: api/PublicationType/5

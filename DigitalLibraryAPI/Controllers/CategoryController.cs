@@ -88,7 +88,7 @@ namespace DigitalLibraryAPI.Controllers
             _context.Category.Add(category);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCategory", new { id = category.Id }, category);
+            return Ok(category);
         }
 
         // DELETE: api/Category/5

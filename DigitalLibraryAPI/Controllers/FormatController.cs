@@ -88,7 +88,7 @@ namespace DigitalLibraryAPI.Controllers
             _context.Format.Add(format);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetFormat", new { id = format.Id }, format);
+            return Ok(format);
         }
 
         // DELETE: api/Format/5
