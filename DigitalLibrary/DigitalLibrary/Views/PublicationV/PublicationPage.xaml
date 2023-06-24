@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DigitalLibrary.Views.PublishingHouseV.PublishingHousePage"
+             x:Class="DigitalLibrary.Views.PublicationV.PublicationPage"
              Title="{Binding Title}"
-             xmlns:local="clr-namespace:DigitalLibrary.ViewModels.PublishingHouseVM"  
+             xmlns:local="clr-namespace:DigitalLibrary.ViewModels.PublicationVM"  
              xmlns:model="clr-namespace:DigitalLibrary.Service.Reference"  
              x:Name="BrowseItemsPage">
 
@@ -12,33 +12,37 @@
         <ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />
     </ContentPage.ToolbarItems>
 
-    <RefreshView x:DataType="local:PublishingHouseViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+    <RefreshView x:DataType="local:PublicationViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
         <CollectionView x:Name="ItemsListView"
                 ItemsSource="{Binding Items}"
                 SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="10" x:DataType="model:PublishingHouse">
+                    <StackLayout Padding="10" x:DataType="model:Publication">
                         <Label Text="{Binding Id}" 
                             LineBreakMode="NoWrap" 
                             Style="{DynamicResource ListItemTextStyle}" 
                             FontSize="12" />
-                        <Label Text="{Binding Name}" 
+                        <Label Text="{Binding Title}" 
                             LineBreakMode="NoWrap" 
                             Style="{DynamicResource ListItemTextStyle}" 
                             FontSize="16" />
-                        <Label Text="{Binding City}" 
+                        <Label Text="{Binding Language}" 
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="13" />
-                        <Label Text="Created Date" FontSize="Medium" />
-                        <Label Text="{Binding CreatedDate, Mode=TwoWay}" FontSize="Medium" />
-                        <Label Text="Modified Date" FontSize="Medium" />
-                        <Label Text="{Binding ModifiedDate, Mode=TwoWay}" FontSize="Medium" />
+                        <Label Text="{Binding Status}" 
+                            LineBreakMode="NoWrap"
+                            Style="{DynamicResource ListItemDetailTextStyle}"
+                            FontSize="13" />
+                        <Label Text="{Binding PublicationYear}" 
+                            LineBreakMode="NoWrap"
+                            Style="{DynamicResource ListItemDetailTextStyle}"
+                            FontSize="13" />
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer 
                                 NumberOfTapsRequired="1"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:PublishingHouseViewModel}}, Path=ItemTapped}"		
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:PublicationViewModel}}, Path=ItemTapped}"		
                                 CommandParameter="{Binding .}">
                             </TapGestureRecognizer>
                         </StackLayout.GestureRecognizers>

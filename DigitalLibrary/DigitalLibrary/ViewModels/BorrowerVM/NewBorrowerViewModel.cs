@@ -2,9 +2,9 @@
 using DigitalLibrary.ViewModels.Abstract;
 using System;
 
-namespace DigitalLibrary.ViewModels.AuthorVM
+namespace DigitalLibrary.ViewModels.BorrowerVM
 {
-    public class NewAuthorViewModel : ANewViewModel<Author>
+    public class NewBorrowerViewModel : ANewViewModel<Borrower>
     {
         #region Fields
         private string name;
@@ -30,11 +30,11 @@ namespace DigitalLibrary.ViewModels.AuthorVM
         }
         #endregion Properties
 
-        public NewAuthorViewModel() : base() { }
+        public NewBorrowerViewModel() : base() { }
 
-        public override Author SetItem()
+        public override Borrower SetItem()
         {
-            return new Author
+            return new Borrower
             {
                 Surname = this.Surname,
                 Name = this.Name,

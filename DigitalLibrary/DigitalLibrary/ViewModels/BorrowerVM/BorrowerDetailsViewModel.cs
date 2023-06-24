@@ -1,10 +1,9 @@
 ﻿using DigitalLibrary.Service.Reference;
 using DigitalLibrary.ViewModels.Abstract;
-using System;
 
-namespace DigitalLibrary.ViewModels.AuthorVM
+namespace DigitalLibrary.ViewModels.BorrowerVM
 {
-    public class NewAuthorViewModel : ANewViewModel<Author>
+    public class BorrowerDetailsViewModel : AItemDetailsViewModel<Borrower>
     {
         #region Fields
         private string name;
@@ -30,21 +29,13 @@ namespace DigitalLibrary.ViewModels.AuthorVM
         }
         #endregion Properties
 
-        public NewAuthorViewModel() : base() { }
+        public BorrowerDetailsViewModel() : base() { }
 
-        public override Author SetItem()
+        public override void LoadProperties(Borrower item)
         {
-            return new Author
-            {
-                Surname = this.Surname,
-                Name = this.Name,
-                IsActive = true,
-            };
-        }
-
-        public override bool ValidateSave()
-        {
-            return !String.IsNullOrEmpty(Name);
+            Name = item.Name;
+            Surname = item.Surname;
+            IsActive = item.IsActive;
         }
     }
 }
