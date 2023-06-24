@@ -458,15 +458,15 @@ namespace DigitalLibrary.Service.Reference
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Borrower> BorrowerAsync(Borrower body)
+        public System.Threading.Tasks.Task<Borrower> BorrowerPOSTAsync(Borrower body)
         {
-            return BorrowerAsync(body, System.Threading.CancellationToken.None);
+            return BorrowerPOSTAsync(body, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Borrower> BorrowerAsync(Borrower body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Borrower> BorrowerPOSTAsync(Borrower body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Borrower");
@@ -528,15 +528,15 @@ namespace DigitalLibrary.Service.Reference
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Borrower> Borrower2Async(int id)
+        public System.Threading.Tasks.Task<Borrower> BorrowerGETAsync(int id)
         {
-            return Borrower2Async(id, System.Threading.CancellationToken.None);
+            return BorrowerGETAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Borrower> Borrower2Async(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Borrower> BorrowerGETAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -599,15 +599,15 @@ namespace DigitalLibrary.Service.Reference
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Borrower3Async(int id, Borrower body)
+        public System.Threading.Tasks.Task BorrowerPUTAsync(int id, Borrower body)
         {
-            return Borrower3Async(id, body, System.Threading.CancellationToken.None);
+            return BorrowerPUTAsync(id, body, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Borrower3Async(int id, Borrower body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task BorrowerPUTAsync(int id, Borrower body, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -669,15 +669,15 @@ namespace DigitalLibrary.Service.Reference
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Borrower4Async(int id)
+        public System.Threading.Tasks.Task BorrowerDELETEAsync(int id)
         {
-            return Borrower4Async(id, System.Threading.CancellationToken.None);
+            return BorrowerDELETEAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Borrower4Async(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task BorrowerDELETEAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -803,15 +803,15 @@ namespace DigitalLibrary.Service.Reference
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Category> CategoryAsync(Category body)
+        public System.Threading.Tasks.Task<Category> CategoryPOSTAsync(Category body)
         {
-            return CategoryAsync(body, System.Threading.CancellationToken.None);
+            return CategoryPOSTAsync(body, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Category> CategoryAsync(Category body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Category> CategoryPOSTAsync(Category body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Category");
@@ -873,15 +873,15 @@ namespace DigitalLibrary.Service.Reference
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Category> Category2Async(int id)
+        public System.Threading.Tasks.Task<Category> CategoryGETAsync(int id)
         {
-            return Category2Async(id, System.Threading.CancellationToken.None);
+            return CategoryGETAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Category> Category2Async(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Category> CategoryGETAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -944,15 +944,15 @@ namespace DigitalLibrary.Service.Reference
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Category3Async(int id, Category body)
+        public System.Threading.Tasks.Task CategoryPUTAsync(int id, Category body)
         {
-            return Category3Async(id, body, System.Threading.CancellationToken.None);
+            return CategoryPUTAsync(id, body, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Category3Async(int id, Category body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task CategoryPUTAsync(int id, Category body, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1014,15 +1014,15 @@ namespace DigitalLibrary.Service.Reference
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Category4Async(int id)
+        public System.Threading.Tasks.Task CategoryDELETEAsync(int id)
         {
-            return Category4Async(id, System.Threading.CancellationToken.None);
+            return CategoryDELETEAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Category4Async(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task CategoryDELETEAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1148,15 +1148,15 @@ namespace DigitalLibrary.Service.Reference
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Format> FormatAsync(Format body)
+        public System.Threading.Tasks.Task<Format> FormatPOSTAsync(Format body)
         {
-            return FormatAsync(body, System.Threading.CancellationToken.None);
+            return FormatPOSTAsync(body, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Format> FormatAsync(Format body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Format> FormatPOSTAsync(Format body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Format");
@@ -1218,15 +1218,15 @@ namespace DigitalLibrary.Service.Reference
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Format> Format2Async(int id)
+        public System.Threading.Tasks.Task<Format> FormatGETAsync(int id)
         {
-            return Format2Async(id, System.Threading.CancellationToken.None);
+            return FormatGETAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Format> Format2Async(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Format> FormatGETAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1289,15 +1289,15 @@ namespace DigitalLibrary.Service.Reference
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Format3Async(int id, Format body)
+        public System.Threading.Tasks.Task FormatPUTAsync(int id, Format body)
         {
-            return Format3Async(id, body, System.Threading.CancellationToken.None);
+            return FormatPUTAsync(id, body, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Format3Async(int id, Format body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task FormatPUTAsync(int id, Format body, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1359,15 +1359,15 @@ namespace DigitalLibrary.Service.Reference
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Format4Async(int id)
+        public System.Threading.Tasks.Task FormatDELETEAsync(int id)
         {
-            return Format4Async(id, System.Threading.CancellationToken.None);
+            return FormatDELETEAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Format4Async(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task FormatDELETEAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1493,15 +1493,15 @@ namespace DigitalLibrary.Service.Reference
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Lector> LectorAsync(Lector body)
+        public System.Threading.Tasks.Task<Lector> LectorPOSTAsync(Lector body)
         {
-            return LectorAsync(body, System.Threading.CancellationToken.None);
+            return LectorPOSTAsync(body, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Lector> LectorAsync(Lector body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Lector> LectorPOSTAsync(Lector body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Lector");
@@ -1563,15 +1563,15 @@ namespace DigitalLibrary.Service.Reference
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Lector> Lector2Async(int id)
+        public System.Threading.Tasks.Task<Lector> LectorGETAsync(int id)
         {
-            return Lector2Async(id, System.Threading.CancellationToken.None);
+            return LectorGETAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Lector> Lector2Async(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Lector> LectorGETAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1634,15 +1634,15 @@ namespace DigitalLibrary.Service.Reference
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Lector3Async(int id, Lector body)
+        public System.Threading.Tasks.Task LectorPUTAsync(int id, Lector body)
         {
-            return Lector3Async(id, body, System.Threading.CancellationToken.None);
+            return LectorPUTAsync(id, body, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Lector3Async(int id, Lector body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task LectorPUTAsync(int id, Lector body, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1704,15 +1704,15 @@ namespace DigitalLibrary.Service.Reference
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task Lector4Async(int id)
+        public System.Threading.Tasks.Task LectorDELETEAsync(int id)
         {
-            return Lector4Async(id, System.Threading.CancellationToken.None);
+            return LectorDELETEAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task Lector4Async(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task LectorDELETEAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -2528,15 +2528,15 @@ namespace DigitalLibrary.Service.Reference
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<PublicationType> PublicationTypeAsync(PublicationType body)
+        public System.Threading.Tasks.Task<PublicationType> PublicationTypePOSTAsync(PublicationType body)
         {
-            return PublicationTypeAsync(body, System.Threading.CancellationToken.None);
+            return PublicationTypePOSTAsync(body, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<PublicationType> PublicationTypeAsync(PublicationType body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<PublicationType> PublicationTypePOSTAsync(PublicationType body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/PublicationType");
@@ -2598,15 +2598,15 @@ namespace DigitalLibrary.Service.Reference
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<PublicationType> PublicationType2Async(int id)
+        public System.Threading.Tasks.Task<PublicationType> PublicationTypeGETAsync(int id)
         {
-            return PublicationType2Async(id, System.Threading.CancellationToken.None);
+            return PublicationTypeGETAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<PublicationType> PublicationType2Async(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<PublicationType> PublicationTypeGETAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -2669,15 +2669,15 @@ namespace DigitalLibrary.Service.Reference
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task PublicationType3Async(int id, PublicationType body)
+        public System.Threading.Tasks.Task PublicationTypePUTAsync(int id, PublicationType body)
         {
-            return PublicationType3Async(id, body, System.Threading.CancellationToken.None);
+            return PublicationTypePUTAsync(id, body, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task PublicationType3Async(int id, PublicationType body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task PublicationTypePUTAsync(int id, PublicationType body, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -2739,15 +2739,15 @@ namespace DigitalLibrary.Service.Reference
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task PublicationType4Async(int id)
+        public System.Threading.Tasks.Task PublicationTypeDELETEAsync(int id)
         {
-            return PublicationType4Async(id, System.Threading.CancellationToken.None);
+            return PublicationTypeDELETEAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task PublicationType4Async(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task PublicationTypeDELETEAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -2873,15 +2873,15 @@ namespace DigitalLibrary.Service.Reference
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<PublishingHouse> PublishingHouseAsync(PublishingHouse body)
+        public System.Threading.Tasks.Task<PublishingHouse> PublishingHousePOSTAsync(PublishingHouse body)
         {
-            return PublishingHouseAsync(body, System.Threading.CancellationToken.None);
+            return PublishingHousePOSTAsync(body, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<PublishingHouse> PublishingHouseAsync(PublishingHouse body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<PublishingHouse> PublishingHousePOSTAsync(PublishingHouse body, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/PublishingHouse");
@@ -2943,15 +2943,15 @@ namespace DigitalLibrary.Service.Reference
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<PublishingHouse> PublishingHouse2Async(int id)
+        public System.Threading.Tasks.Task<PublishingHouse> PublishingHouseGETAsync(int id)
         {
-            return PublishingHouse2Async(id, System.Threading.CancellationToken.None);
+            return PublishingHouseGETAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<PublishingHouse> PublishingHouse2Async(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<PublishingHouse> PublishingHouseGETAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -3014,15 +3014,15 @@ namespace DigitalLibrary.Service.Reference
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task PublishingHouse3Async(int id, PublishingHouse body)
+        public System.Threading.Tasks.Task PublishingHousePUTAsync(int id, PublishingHouse body)
         {
-            return PublishingHouse3Async(id, body, System.Threading.CancellationToken.None);
+            return PublishingHousePUTAsync(id, body, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task PublishingHouse3Async(int id, PublishingHouse body, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task PublishingHousePUTAsync(int id, PublishingHouse body, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -3084,15 +3084,15 @@ namespace DigitalLibrary.Service.Reference
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task PublishingHouse4Async(int id)
+        public System.Threading.Tasks.Task PublishingHouseDELETEAsync(int id)
         {
-            return PublishingHouse4Async(id, System.Threading.CancellationToken.None);
+            return PublishingHouseDELETEAsync(id, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task PublishingHouse4Async(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task PublishingHouseDELETEAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -3309,7 +3309,7 @@ namespace DigitalLibrary.Service.Reference
         public System.DateTimeOffset? ModifiedDate { get; set; }
     
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        //[System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Name { get; set; }
     
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -3334,7 +3334,7 @@ namespace DigitalLibrary.Service.Reference
         public System.DateTimeOffset? ModifiedDate { get; set; }
     
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        //[System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Name { get; set; }
     
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -3470,7 +3470,7 @@ namespace DigitalLibrary.Service.Reference
         public System.DateTimeOffset? ModifiedDate { get; set; }
     
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        //[System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string Name { get; set; }
     
         [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
