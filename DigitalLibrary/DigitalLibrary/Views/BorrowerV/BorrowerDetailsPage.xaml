@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DigitalLibrary.Views.CategoryV.CategoryDetailsPage"
+             x:Class="DigitalLibrary.Views.BorrowerV.BorrowerDetailsPage"
              Shell.PresentationMode="ModalAnimated"
              Title="Details">
     <ContentPage.Content>
@@ -10,8 +10,8 @@
             <Label Text="{Binding Id, Mode=TwoWay}" FontSize="Medium" />
             <Label Text="Name" FontSize="Medium" />
             <Label Text="{Binding Name, Mode=TwoWay}" FontSize="Medium" />
-            <Label Text="Description" FontSize="Medium" />
-            <Label Text="{Binding Description, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="Surname" FontSize="Medium" />
+            <Label Text="{Binding Surname, Mode=TwoWay}" FontSize="Medium" />
             <Label Text="Active" FontSize="Medium" />
             <Label Text="{Binding IsActive, Mode=TwoWay}" FontSize="Medium" />
             <Label Text="Created Date" FontSize="Medium" />

@@ -14,6 +14,10 @@
             <Label Text="{Binding City, Mode=TwoWay}" FontSize="Medium" />
             <Label Text="Active" FontSize="Medium" />
             <Label Text="{Binding IsActive, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="Created Date" FontSize="Medium" />
+            <Label Text="{Binding CreatedDate, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="Modified Date" FontSize="Medium" />
+            <Label Text="{Binding ModifiedDate, Mode=TwoWay}" FontSize="Medium" />
             <StackLayout Orientation="Horizontal">
                 <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
                 <Button Text="Delete" Command="{Binding DeleteCommand}" HorizontalOptions="FillAndExpand"></Button>

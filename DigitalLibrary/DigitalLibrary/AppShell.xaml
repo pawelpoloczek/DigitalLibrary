@@ -7,6 +7,9 @@
        xmlns:localPublicationType="clr-namespace:DigitalLibrary.Views.PublicationTypeV"
        xmlns:localFormat="clr-namespace:DigitalLibrary.Views.FormatV"
        xmlns:localPublishingHouse="clr-namespace:DigitalLibrary.Views.PublishingHouseV"
+       xmlns:localLector="clr-namespace:DigitalLibrary.Views.LectorV"
+       xmlns:localBorrower="clr-namespace:DigitalLibrary.Views.BorrowerV"
+        xmlns:localPublication="clr-namespace:DigitalLibrary.Views.PublicationV"
        Title="DigitalLibrary"
        x:Class="DigitalLibrary.AppShell">
 
@@ -86,15 +89,23 @@
     <FlyoutItem Title="About" Icon="icon_about.png">
         <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
     </FlyoutItem>
+
+    <FlyoutItem Title="Publication" Icon="icon_feed.png">
+        <ShellContent Route="PublicationPage" ContentTemplate="{DataTemplate localPublication:PublicationPage}" />
+    </FlyoutItem>
+
     <FlyoutItem Title="Authors" Icon="icon_feed.png">
         <ShellContent Route="AuthorPage" ContentTemplate="{DataTemplate localAuthor:AuthorPage}" />
     </FlyoutItem>
+    
     <FlyoutItem Title="Publication Categories" Icon="icon_feed.png">
         <ShellContent Route="CategoryPage" ContentTemplate="{DataTemplate localCategory:CategoryPage}" />
     </FlyoutItem>
+    
     <FlyoutItem Title="Publication Types" Icon="icon_feed.png">
         <ShellContent Route="PublicationTypePage" ContentTemplate="{DataTemplate localPublicationType:PublicationTypePage}" />
     </FlyoutItem>
+    
     <FlyoutItem Title="Publication Formats" Icon="icon_feed.png">
         <ShellContent Route="FormatPage" ContentTemplate="{DataTemplate localFormat:FormatPage}" />
     </FlyoutItem>
@@ -102,7 +113,15 @@
     <FlyoutItem Title="Publishing House" Icon="icon_feed.png">
         <ShellContent Route="PublishingHousePage" ContentTemplate="{DataTemplate localPublishingHouse:PublishingHousePage}" />
     </FlyoutItem>
-    
+
+    <FlyoutItem Title="Lector" Icon="icon_feed.png">
+        <ShellContent Route="LectorPage" ContentTemplate="{DataTemplate localLector:LectorPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Borrowers" Icon="icon_feed.png">
+        <ShellContent Route="BorrowerPage" ContentTemplate="{DataTemplate localBorrower:BorrowerPage}" />
+    </FlyoutItem>
+
     <FlyoutItem Title="Browse" Icon="icon_feed.png">
         <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:ItemsPage}" />
     </FlyoutItem>

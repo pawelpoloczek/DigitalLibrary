@@ -1,12 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DigitalLibrary.Views.AuthorV.AuthorDetailsPage">
+             x:Class="DigitalLibrary.Views.AuthorV.AuthorDetailsPage"
+             Shell.PresentationMode="ModalAnimated"
+             Title="Details">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Spacing="3" Padding="15">
+            <Label Text="Id" FontSize="Medium" />
+            <Label Text="{Binding Id, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="Name" FontSize="Medium" />
+            <Label Text="{Binding Name, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="Surname" FontSize="Medium" />
+            <Label Text="{Binding Surname, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="Active" FontSize="Medium" />
+            <Label Text="{Binding IsActive, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="Created Date" FontSize="Medium" />
+            <Label Text="{Binding CreatedDate, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="Modified Date" FontSize="Medium" />
+            <Label Text="{Binding ModifiedDate, Mode=TwoWay}" FontSize="Medium" />
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                <Button Text="Delete" Command="{Binding DeleteCommand}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

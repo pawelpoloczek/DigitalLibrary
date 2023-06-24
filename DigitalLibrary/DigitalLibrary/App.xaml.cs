@@ -14,12 +14,16 @@ namespace DigitalLibrary
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+            
             DependencyService.Register<CategoryDataStore>();
             DependencyService.Register<PublicationTypeDataStore>();
             DependencyService.Register<FormatDataStore>();
             DependencyService.Register<PublishingHouseDataStore>();
-            
+            DependencyService.Register<LectorDataStore>();
+            DependencyService.Register<BorrowerDataStore>();
+            DependencyService.Register<AuthorDataStore>();
+            DependencyService.Register<PublicationDataStore>();
+
             MainPage = new AppShell();
         }
 
