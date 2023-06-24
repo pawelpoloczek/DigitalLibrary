@@ -88,7 +88,7 @@ namespace DigitalLibraryAPI.Controllers
             _context.Lector.Add(lector);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetLector", new { id = lector.Id }, lector);
+            return Ok(lector);
         }
 
         // DELETE: api/Lector/5

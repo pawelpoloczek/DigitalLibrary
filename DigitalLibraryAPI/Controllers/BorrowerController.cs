@@ -88,7 +88,7 @@ namespace DigitalLibraryAPI.Controllers
             _context.Borrower.Add(borrower);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBorrower", new { id = borrower.Id }, borrower);
+            return Ok(borrower);
         }
 
         // DELETE: api/Borrower/5
