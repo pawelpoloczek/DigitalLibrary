@@ -243,30 +243,119 @@ namespace DigitalLibraryAPI.Controllers
 
         // PUT: api/Publication/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPublication(int id, Publication publication)
+        public async Task<IActionResult> PutPublication(int id, PublicationAddViewModel publication)
         {
-            if (id != publication.Id)
+            if (false == contextsExists())
             {
-                return BadRequest();
+                return Problem("Entity set 'DigitalLibraryAPIContext'  has missing context.");
             }
 
-            _context.Entry(publication).State = EntityState.Modified;
+            var publicationEntity = _context.Publication.Find(id);
+            if (publicationEntity == null)
+            {
+                return NotFound();
+            }
 
-            try
+            var category = _context.Category.Find(publication.CategoryId);
+            if (category == null)
             {
-                await _context.SaveChangesAsync();
+                return NotFound("Category not found.");
             }
-            catch (DbUpdateConcurrencyException)
+
+            Lector? lector = null;
+            int? idLector = null;
+            if (publication.LectorId != null)
             {
-                if (!PublicationExists(id))
+                lector = _context.Lector.Find(publication.LectorId);
+                if (lector != null)
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
+                    idLector = lector.Id;
                 }
             }
+
+            var publishingHouse = _context.PublishingHouse.Find(publication.PublishingHouseId);
+            if (publishingHouse == null)
+            {
+                return NotFound("Publishing house not found.");
+            }
+
+            var publicationType = _context.Type.Find(publication.PublicationTypeId);
+            if (publicationType == null)
+            {
+                return NotFound("Publication type not found.");
+            }
+
+            var format = _context.Format.Find(publication.FormatId);
+            if (format == null)
+            {
+                return NotFound("Format not found.");
+            }
+
+            Borrower? borrower = null;
+            int? idBorrower = null;
+            if (publication.BorrowerId != null)
+            {
+                borrower = _context.Borrower.Find(publication.BorrowerId);
+                if (borrower != null)
+                {
+                    idBorrower = borrower.Id;
+                }
+            }
+
+            /*
+            var oldAuthors = _context.PublicationAuthor.Where(p => p.IdPublication == publication.Id);
+            publicationEntity.PublicationAuthors = new Collection<PublicationAuthor>();
+            foreach (var oldAuthor in oldAuthors)
+            {
+                _context.PublicationAuthor.Remove(oldAuthor);
+            }
+            await _context.SaveChangesAsync();
+            */
+
+            var publicationAuthors = new Collection<PublicationAuthor>();
+            if (publication.AuthorIds.Any())
+            {
+                foreach (var authorId in publication.AuthorIds)
+                {
+                    var author = _context.Author.Find(authorId);
+                    if (author == null)
+                    {
+                        continue;
+                    }
+
+                    publicationAuthors.Add(new PublicationAuthor
+                    {
+                        Author = author,
+                        IdAuthor = author.Id,
+                        Publication = publicationEntity,
+                        IdPublication = publicationEntity.Id,
+                    });
+                }
+            }
+
+            publicationEntity.IsActive = publication.IsActive;
+            publicationEntity.CreatedDate = publication.CreatedDate;
+            publicationEntity.ModifiedDate = publication.ModifiedDate;
+            publicationEntity.Title = publication.Title;
+            publicationEntity.Language = publication.Language;
+            publicationEntity.Status = publication.Status;
+            publicationEntity.PublicationYear = publication.PublicationYear;
+            publicationEntity.PublicationAuthors = publicationAuthors;
+            publicationEntity.IdCategory = publication.CategoryId;
+            publicationEntity.Category = category;
+            publicationEntity.IdLector = publication.LectorId;
+            publicationEntity.Lector = lector;
+            publicationEntity.IdPublishingHouse = publication.PublishingHouseId;
+            publicationEntity.PublishingHouse = publishingHouse;
+            publicationEntity.IdPublicationType = publication.PublicationTypeId;
+            publicationEntity.PublicationType = publicationType;
+            publicationEntity.IdFormat = publication.FormatId;
+            publicationEntity.Format = format;
+            publicationEntity.IdBorrower = publication.BorrowerId;
+            publicationEntity.Borrower = borrower;
+
+            _context.Update(publicationEntity);
+            await _context.SaveChangesAsync();
 
             return NoContent();
         }
