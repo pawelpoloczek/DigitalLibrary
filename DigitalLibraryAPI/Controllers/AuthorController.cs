@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using DigitalLibraryAPI.Data;
 using DigitalLibraryAPI.Models;
+using DigitalLibraryAPI.ViewModels;
+using System.Collections.ObjectModel;
 
 namespace DigitalLibraryAPI.Controllers
 {
@@ -18,18 +20,66 @@ namespace DigitalLibraryAPI.Controllers
 
         // GET: api/Author
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Author>>> GetAuthor()
+        public async Task<ActionResult<IEnumerable<AuthorViewModel>>> GetAuthor()
         {
             if (_context.Author == null)
             {
                 return NotFound();
             }
-            return await _context.Author.ToListAsync();
+
+            var authorList = await _context.Author.ToListAsync();
+
+            var authorsViewList = new Collection<AuthorViewModel>();
+
+            foreach (var author in authorList)
+            {
+                var authorPublicationsView = new Collection<PublicationForAutorViewModel>();
+                var authorPublications = author.PublicationAuthors;
+                if (null != authorPublications)
+                {
+                    foreach (var authorPublication in authorPublications.ToList())
+                    {
+                        if (_context.Publication == null)
+                        {
+                            continue;
+                        }
+
+                        var publication = _context.Publication.Find(authorPublication.IdPublication);
+                        if (null == publication)
+                        {
+                            continue;
+                        }
+
+                        var publicationView = new PublicationForAutorViewModel
+                        {
+                            Id = publication.Id,
+                            Title = publication.Title
+                        };
+
+                        authorPublicationsView.Add(publicationView);
+                    }
+                }
+
+                var authorView = new AuthorViewModel
+                {
+                    Id = author.Id,
+                    IsActive = author.IsActive,
+                    Name = author.Name,
+                    CreatedDate = author.CreatedDate,
+                    ModifiedDate = author.ModifiedDate,
+                    Surname = author.Surname,
+                    Publications = authorPublicationsView
+                };
+
+                authorsViewList.Add(authorView);
+            }
+
+            return authorsViewList;
         }
 
         // GET: api/Author/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Author>> GetAuthor(int id)
+        public async Task<ActionResult<AuthorViewModel>> GetAuthor(int id)
         {
             if (_context.Author == null)
             {
@@ -42,20 +92,65 @@ namespace DigitalLibraryAPI.Controllers
                 return NotFound();
             }
 
-            return author;
+
+            var authorPublicationsView = new Collection<PublicationForAutorViewModel>();
+            var authorPublications = author.PublicationAuthors;
+            if (null != authorPublications)
+            {
+                foreach (var authorPublication in authorPublications.ToList())
+                {
+                    if (_context.Publication == null)
+                    {
+                        continue;
+                    }
+
+                    var publication = _context.Publication.Find(authorPublication.IdPublication);
+                    if (null == publication)
+                    {
+                        continue;
+                    }
+
+                    var publicationView = new PublicationForAutorViewModel
+                    {
+                        Id = publication.Id,
+                        Title = publication.Title
+                    };
+
+                    authorPublicationsView.Add(publicationView);
+                }
+            }
+
+            var authorView = new AuthorViewModel
+            {
+                Id = author.Id,
+                IsActive = author.IsActive,
+                Name = author.Name,
+                CreatedDate = author.CreatedDate,
+                ModifiedDate = author.ModifiedDate,
+                Surname = author.Surname,
+                Publications = authorPublicationsView
+            };
+
+            return authorView;
         }
 
         // PUT: api/Author/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAuthor(int id, Author author)
+        public async Task<IActionResult> PutAuthor(int id, AuthorAddViewModel author)
         {
-            if (id != author.Id)
+            var authorEntity = await _context.Author.FindAsync(id);
+            if (authorEntity == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(author).State = EntityState.Modified;
+            authorEntity.Name = author.Name;
+            authorEntity.Surname = author.Surname;
+            authorEntity.CreatedDate = author.CreatedDate;
+            authorEntity.ModifiedDate = author.ModifiedDate;
+            authorEntity.IsActive = author.IsActive;
+
+            _context.Update(authorEntity);
 
             try
             {
@@ -77,18 +172,30 @@ namespace DigitalLibraryAPI.Controllers
         }
 
         // POST: api/Author
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Author>> PostAuthor(Author author)
+        public async Task<ActionResult<Author>> PostAuthor(AuthorAddViewModel author)
         {
             if (_context.Author == null)
             {
                 return Problem("Entity set 'DigitalLibraryAPIContext.Author'  is null.");
             }
-            _context.Author.Add(author);
+
+            var authorEntity = new Author
+            {
+                IsActive = author.IsActive,
+                Name = author.Name,
+                Surname = author.Surname,
+                CreatedDate = author.CreatedDate,
+                ModifiedDate = author.ModifiedDate,
+                PublicationAuthors = new Collection<PublicationAuthor>()
+            };
+
+            _context.Author.Add(authorEntity);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAuthor", new { id = author.Id }, author);
+            author.Id = authorEntity.Id;
+
+            return CreatedAtAction("GetAuthor", new { id = authorEntity.Id }, author);
         }
 
         // DELETE: api/Author/5
