@@ -19,18 +19,25 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Padding="10" x:DataType="model:Category">
+                        <Label Text="Id" FontSize="Small" />
                         <Label Text="{Binding Id}" 
                             LineBreakMode="NoWrap" 
                             Style="{DynamicResource ListItemTextStyle}" 
                             FontSize="12" />
+                        <Label Text="Name" FontSize="Small" />
                         <Label Text="{Binding Name}" 
                             LineBreakMode="NoWrap" 
                             Style="{DynamicResource ListItemTextStyle}" 
                             FontSize="16" />
+                        <Label Text="Desc" FontSize="Small" />
                         <Label Text="{Binding Description}" 
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="13" />
+                        <Label Text="Created Date" FontSize="Small" />
+                        <Label Text="{Binding CreatedDate, Mode=TwoWay}" FontSize="Medium" />
+                        <Label Text="Modified Date" FontSize="Small" />
+                        <Label Text="{Binding ModifiedDate, Mode=TwoWay}" FontSize="Medium" />
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer 
                                 NumberOfTapsRequired="1"

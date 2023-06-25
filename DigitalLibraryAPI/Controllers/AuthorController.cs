@@ -88,7 +88,7 @@ namespace DigitalLibraryAPI.Controllers
             _context.Author.Add(author);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAuthor", new { id = author.Id }, author);
+            return Ok(author);
         }
 
         // DELETE: api/Author/5
