@@ -173,7 +173,7 @@ namespace DigitalLibraryAPI.Controllers
 
         // POST: api/Author
         [HttpPost]
-        public async Task<ActionResult<Author>> PostAuthor(AuthorAddViewModel author)
+        public async Task<ActionResult<AuthorAddViewModel>> PostAuthor(AuthorAddViewModel author)
         {
             if (_context.Author == null)
             {
@@ -192,6 +192,8 @@ namespace DigitalLibraryAPI.Controllers
 
             _context.Author.Add(authorEntity);
             await _context.SaveChangesAsync();
+
+            author.Id = authorEntity.Id;
 
             return Ok(author);
         }

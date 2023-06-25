@@ -11,7 +11,6 @@ namespace DigitalLibraryAPI.Models
         public DateTime? ModifiedDate { get; set; } = DateTime.Now;
         public string Title { get; set; }
         public string Language { get; set; }
-        /* status false - niedostępny, true - dostepny */
         public bool Status { get; set; }
         public int PublicationYear { get; set; }
         public ICollection<AuthorForPublicationViewModel> Authors { get; set; }
@@ -20,6 +19,6 @@ namespace DigitalLibraryAPI.Models
         public PublishingHouseForPublicationViewModel PublishingHouse { get; set; }
         public PublicationTypeForPublicationViewModel PublicationType { get; set; }
         public FormatForPublicationViewModel Format { get; set; }
-        public virtual BorrowerForPublicationViewModel? Borrower { get; set; }
+        public BorrowerForPublicationViewModel? Borrower { get; set; }
     }
 }

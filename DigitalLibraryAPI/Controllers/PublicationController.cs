@@ -4,6 +4,7 @@ using DigitalLibraryAPI.Data;
 using DigitalLibraryAPI.Models;
 using DigitalLibraryAPI.ViewModels;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace DigitalLibraryAPI.Controllers
 {
@@ -22,9 +23,9 @@ namespace DigitalLibraryAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PublicationViewModel>>> GetPublication()
         {
-            if (_context.Publication == null)
+            if (false == contextsExists())
             {
-                return NotFound();
+                return Problem("Entity set 'DigitalLibraryAPIContext'  has missing context.");
             }
 
             var publicationList = await _context.Publication.ToListAsync();
@@ -33,7 +34,7 @@ namespace DigitalLibraryAPI.Controllers
             foreach (var publication in publicationList)
             {
                 var publicationAuthorViewModels = new Collection<AuthorForPublicationViewModel>();
-                var publicationAuthors = publication.PublicationAuthors;
+                var publicationAuthors = _context.PublicationAuthor.Where(p => p.IdPublication == publication.Id);
                 if (null != publicationAuthors)
                 {
                     foreach (var publicationAuthor in publicationAuthors.ToList())
@@ -61,26 +62,39 @@ namespace DigitalLibraryAPI.Controllers
                 }
 
                 LectorForPublicationViewModel? lectorForPublication = null;
-                if (null != publication.Lector)
+                if (null != publication.IdLector)
                 {
-                    lectorForPublication = new LectorForPublicationViewModel
+                    var lector = _context.Lector.Find(publication.IdLector);
+                    if (null != lector)
                     {
-                        Id = publication.Lector.Id,
-                        Name = publication.Lector.Name,
-                        Surname = publication.Lector.Surname,
-                    };
+                        lectorForPublication = new LectorForPublicationViewModel
+                        {
+                            Id = lector.Id,
+                            Name = lector.Name,
+                            Surname = lector.Surname,
+                        };
+                    }
                 }
 
                 BorrowerForPublicationViewModel? borrowerForPublication = null;
-                if (null != publication.Borrower)
+                if (null != publication.IdBorrower)
                 {
-                    borrowerForPublication = new BorrowerForPublicationViewModel
+                    var borrower = _context.Borrower.Find(publication.IdBorrower);
+                    if (null != borrower)
                     {
-                        Id = publication.Borrower.Id,
-                        Name = publication.Borrower.Name,
-                        Surname = publication.Borrower.Surname,
-                    };
+                        borrowerForPublication = new BorrowerForPublicationViewModel
+                        {
+                            Id = borrower.Id,
+                            Name = borrower.Name,
+                            Surname = borrower.Surname,
+                        };
+                    }
                 }
+
+                var category = _context.Category.Find(publication.IdCategory);
+                var publishingHouse = _context.PublishingHouse.Find(publication.IdPublishingHouse);
+                var publicationType = _context.Type.Find(publication.IdPublicationType);
+                var format = _context.Format.Find(publication.IdFormat);
 
                 var publicationViewModel = new PublicationViewModel
                 {
@@ -95,29 +109,27 @@ namespace DigitalLibraryAPI.Controllers
                     Authors = publicationAuthorViewModels,
                     Category = new CategoryForPublicationViewModel
                     {
-                        Id = publication.Category.Id,
-                        Name = publication.Category.Name,
+                        Id = category.Id,
+                        Name = category.Name,
                     },
                     Lector = lectorForPublication,
                     PublishingHouse = new PublishingHouseForPublicationViewModel
                     {
-                        Id = publication.PublishingHouse.Id,
-                        Name = publication.PublishingHouse.Name,
+                        Id = publishingHouse.Id,
+                        Name = publishingHouse.Name,
                     },
                     PublicationType = new PublicationTypeForPublicationViewModel
                     {
-                        Id = publication.PublicationType.Id,
-                        Name = publication.PublicationType.Name,
+                        Id = publicationType.Id,
+                        Name = publicationType.Name,
                     },
                     Format = new FormatForPublicationViewModel
                     {
-                        Id = publication.Format.Id,
-                        Name = publication.Format.Name,
+                        Id = format.Id,
+                        Name = format.Name,
                     },
                     Borrower = borrowerForPublication,
                 };
-
-
                 publicationViewList.Add(publicationViewModel);
             }
 
@@ -128,11 +140,12 @@ namespace DigitalLibraryAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<PublicationViewModel>> GetPublication(int id)
         {
-            if (_context.Publication == null)
+            if (false == contextsExists())
             {
-                return NotFound();
+                return Problem("Entity set 'DigitalLibraryAPIContext'  has missing context.");
             }
-            var publication = await _context.Publication.FindAsync(id);
+
+            var publication = _context.Publication.Find(id);
 
             if (publication == null)
             {
@@ -140,16 +153,11 @@ namespace DigitalLibraryAPI.Controllers
             }
 
             var publicationAuthorViewModels = new Collection<AuthorForPublicationViewModel>();
-            var publicationAuthors = publication.PublicationAuthors;
+            var publicationAuthors = _context.PublicationAuthor.Where(p => p.IdPublication == publication.Id);
             if (null != publicationAuthors)
             {
                 foreach (var publicationAuthor in publicationAuthors.ToList())
                 {
-                    if (_context.Author == null)
-                    {
-                        continue;
-                    }
-
                     var author = _context.Author.Find(publicationAuthor.IdAuthor);
                     if (null == author)
                     {
@@ -189,6 +197,11 @@ namespace DigitalLibraryAPI.Controllers
                 };
             }
 
+            var category = _context.Category.Find(publication.IdCategory);
+            var publishingHouse = _context.PublishingHouse.Find(publication.IdPublishingHouse);
+            var publicationType = _context.Type.Find(publication.IdPublicationType);
+            var format = _context.Format.Find(publication.IdFormat);
+
             var publicationViewModel = new PublicationViewModel
             {
                 Id = publication.Id,
@@ -202,24 +215,24 @@ namespace DigitalLibraryAPI.Controllers
                 Authors = publicationAuthorViewModels,
                 Category = new CategoryForPublicationViewModel
                 {
-                    Id = publication.Category.Id,
-                    Name = publication.Category.Name,
+                    Id = category.Id,
+                    Name = category.Name,
                 },
                 Lector = lectorForPublication,
                 PublishingHouse = new PublishingHouseForPublicationViewModel
                 {
-                    Id = publication.PublishingHouse.Id,
-                    Name = publication.PublishingHouse.Name,
+                    Id = publishingHouse.Id,
+                    Name = publishingHouse.Name,
                 },
                 PublicationType = new PublicationTypeForPublicationViewModel
                 {
-                    Id = publication.PublicationType.Id,
-                    Name = publication.PublicationType.Name,
+                    Id = publicationType.Id,
+                    Name = publicationType.Name,
                 },
                 Format = new FormatForPublicationViewModel
                 {
-                    Id = publication.Format.Id,
-                    Name = publication.Format.Name,
+                    Id = format.Id,
+                    Name = format.Name,
                 },
                 Borrower = borrowerForPublication,
             };
@@ -229,7 +242,6 @@ namespace DigitalLibraryAPI.Controllers
         }
 
         // PUT: api/Publication/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPublication(int id, Publication publication)
         {
@@ -260,16 +272,114 @@ namespace DigitalLibraryAPI.Controllers
         }
 
         // POST: api/Publication
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Publication>> PostPublication(Publication publication)
+        public async Task<ActionResult<PublicationAddViewModel>> PostPublication(PublicationAddViewModel publication)
         {
-            if (_context.Publication == null)
+            if (false == contextsExists())
             {
-                return Problem("Entity set 'DigitalLibraryAPIContext.Publication'  is null.");
+                return Problem("Entity set 'DigitalLibraryAPIContext'  has missing context.");
             }
-            _context.Publication.Add(publication);
+
+            var category = _context.Category.Find(publication.CategoryId);
+            if (category == null)
+            {
+                return NotFound("Category not found.");
+            }
+
+            Lector? lector = null;
+            int? idLector = null;
+            if (publication.LectorId != null)
+            {
+                lector = _context.Lector.Find(publication.LectorId);
+                if (lector != null)
+                {
+                    idLector = lector.Id;
+                }
+            }
+
+            var publishingHouse = _context.PublishingHouse.Find(publication.PublishingHouseId);
+            if (publishingHouse == null)
+            {
+                return NotFound("Publishing house not found.");
+            }
+
+            var publicationType = _context.Type.Find(publication.PublicationTypeId);
+            if (publicationType == null)
+            {
+                return NotFound("Publication type not found.");
+            }
+
+            var format = _context.Format.Find(publication.FormatId);
+            if (format == null)
+            {
+                return NotFound("Format not found.");
+            }
+
+            Borrower? borrower = null;
+            int? idBorrower = null;
+            if (publication.BorrowerId != null)
+            {
+                borrower = _context.Borrower.Find(publication.BorrowerId);
+                if (borrower != null)
+                {
+                    idBorrower = borrower.Id;
+                }
+            }
+
+            var publicationEntity = new Publication
+            {
+                IsActive = publication.IsActive,
+                CreatedDate = publication.CreatedDate,
+                ModifiedDate = publication.ModifiedDate,
+                Title = publication.Title,
+                Language = publication.Language,
+                Status = publication.Status,
+                PublicationYear = publication.PublicationYear,
+                PublicationAuthors = new Collection<PublicationAuthor>(),
+                Category = category,
+                IdCategory = category.Id,
+                Lector = lector,
+                IdLector = idLector,
+                PublishingHouse = publishingHouse,
+                IdPublishingHouse = publishingHouse.Id,
+                PublicationType = publicationType,
+                IdPublicationType = publicationType.Id,
+                Format = format,
+                IdFormat = format.Id,
+                Borrower = borrower,
+                IdBorrower = idBorrower,
+            };
+
+            _context.Publication.Add(publicationEntity);
             await _context.SaveChangesAsync();
+
+
+            var publicationAuthors = new Collection<PublicationAuthor>();
+            if (publication.AuthorIds.Any())
+            {
+                foreach (var authorId in publication.AuthorIds)
+                {
+                    var author = _context.Author.Find(authorId);
+                    if (author == null)
+                    {
+                        continue;
+                    }
+
+                    publicationAuthors.Add(new PublicationAuthor
+                    {
+                        Author = author,
+                        IdAuthor = author.Id,
+                        Publication = publicationEntity,
+                        IdPublication = publicationEntity.Id,
+                    });
+                }
+            }
+
+            publicationEntity.PublicationAuthors = publicationAuthors;
+            _context.Update(publicationEntity);
+            await _context.SaveChangesAsync();
+
+            publication.Id = publicationEntity.Id;
 
             return Ok(publication);
         }
@@ -297,6 +407,18 @@ namespace DigitalLibraryAPI.Controllers
         private bool PublicationExists(int id)
         {
             return (_context.Publication?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        private bool contextsExists()
+        {
+            if (_context.Publication == null || _context.Category == null || _context.Lector == null
+                || _context.PublishingHouse == null || _context.Type == null || _context.Format == null
+                || _context.Borrower == null || _context.Author == null || _context.PublicationAuthor == null)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
