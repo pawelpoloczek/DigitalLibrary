@@ -193,9 +193,7 @@ namespace DigitalLibraryAPI.Controllers
             _context.Author.Add(authorEntity);
             await _context.SaveChangesAsync();
 
-            author.Id = authorEntity.Id;
-
-            return CreatedAtAction("GetAuthor", new { id = authorEntity.Id }, author);
+            return Ok(author);
         }
 
         // DELETE: api/Author/5

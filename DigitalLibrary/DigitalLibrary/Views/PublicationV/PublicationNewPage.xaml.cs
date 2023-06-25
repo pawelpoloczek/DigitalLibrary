@@ -14,6 +14,7 @@ namespace DigitalLibrary.Views.PublicationV
     public partial class PublicationNewPage : ContentPage
     {
         public Service.Reference.Publication Item { get; set; }
+
         public PublicationNewPage()
         {
             InitializeComponent();

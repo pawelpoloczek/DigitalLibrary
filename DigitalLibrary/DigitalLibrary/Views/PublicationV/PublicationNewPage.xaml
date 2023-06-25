@@ -10,10 +10,48 @@
             <Entry Text="{Binding Title, Mode=TwoWay}" FontSize="Medium" />
             <Label Text="Language" FontSize="Medium" />
             <Entry Text="{Binding Language, Mode=TwoWay}" FontSize="Medium" />
-            <Label Text="Status" FontSize="Medium" />
+            <Label Text="Is Borrower" FontSize="Medium" />
             <Entry Text="{Binding Status, Mode=TwoWay}" FontSize="Medium" />
             <Label Text="Publication Year" FontSize="Medium" />
             <Entry Text="{Binding PublicationYear, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="Picker" FontSize="Medium" />
+
+            <Picker Title="Select Category"
+                    ItemsSource="{Binding Categories}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedCategory}"
+                    FontSize="Medium" Margin="0"/>
+
+            <Picker Title="Select Lector"
+                    ItemsSource="{Binding Lectors}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedLector}"
+                    FontSize="Medium" Margin="0"/>
+
+            <Picker Title="Select Publishing House"
+                    ItemsSource="{Binding PublishingHouses}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedPublishingHouse}"
+                    FontSize="Medium" Margin="0"/>
+
+            <Picker Title="Publication Type"
+                    ItemsSource="{Binding PublicationTypes}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedPublicationType}"
+                    FontSize="Medium" Margin="0"/>
+
+            <Picker Title="Select Format"
+                    ItemsSource="{Binding Formats}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedFormat}"
+                    FontSize="Medium" Margin="0"/>
+
+            <Picker Title="Select Borrower"
+                    ItemsSource="{Binding Borrowers}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedBorrower}"
+                    FontSize="Medium" Margin="0"/>
+
 
             <StackLayout Orientation="Horizontal">
                 <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
