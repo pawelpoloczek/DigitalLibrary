@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using DigitalLibraryAPI.Data;
 using DigitalLibraryAPI.Models;
+using DigitalLibraryAPI.ViewModels;
+using System.Collections.ObjectModel;
 
 namespace DigitalLibraryAPI.Controllers
 {
@@ -18,18 +20,113 @@ namespace DigitalLibraryAPI.Controllers
 
         // GET: api/Publication
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Publication>>> GetPublication()
+        public async Task<ActionResult<IEnumerable<PublicationViewModel>>> GetPublication()
         {
             if (_context.Publication == null)
             {
                 return NotFound();
             }
-            return await _context.Publication.ToListAsync();
+
+            var publicationList = await _context.Publication.ToListAsync();
+            var publicationViewList = new Collection<PublicationViewModel>();
+
+            foreach (var publication in publicationList)
+            {
+                var publicationAuthorViewModels = new Collection<AuthorForPublicationViewModel>();
+                var publicationAuthors = publication.PublicationAuthors;
+                if (null != publicationAuthors)
+                {
+                    foreach (var publicationAuthor in publicationAuthors.ToList())
+                    {
+                        if (_context.Author == null)
+                        {
+                            continue;
+                        }
+
+                        var author = _context.Author.Find(publicationAuthor.IdAuthor);
+                        if (null == author)
+                        {
+                            continue;
+                        }
+
+                        var authorView = new AuthorForPublicationViewModel
+                        {
+                            Id = author.Id,
+                            Name = author.Name,
+                            Surname = author.Surname,
+                        };
+
+                        publicationAuthorViewModels.Add(authorView);
+                    }
+                }
+
+                LectorForPublicationViewModel? lectorForPublication = null;
+                if (null != publication.Lector)
+                {
+                    lectorForPublication = new LectorForPublicationViewModel
+                    {
+                        Id = publication.Lector.Id,
+                        Name = publication.Lector.Name,
+                        Surname = publication.Lector.Surname,
+                    };
+                }
+
+                BorrowerForPublicationViewModel? borrowerForPublication = null;
+                if (null != publication.Borrower)
+                {
+                    borrowerForPublication = new BorrowerForPublicationViewModel
+                    {
+                        Id = publication.Borrower.Id,
+                        Name = publication.Borrower.Name,
+                        Surname = publication.Borrower.Surname,
+                    };
+                }
+
+                var publicationViewModel = new PublicationViewModel
+                {
+                    Id = publication.Id,
+                    IsActive = publication.IsActive,
+                    CreatedDate = publication.CreatedDate,
+                    ModifiedDate = publication.ModifiedDate,
+                    Title = publication.Title,
+                    Language = publication.Language,
+                    Status = publication.Status,
+                    PublicationYear = publication.PublicationYear,
+                    Authors = publicationAuthorViewModels,
+                    Category = new CategoryForPublicationViewModel
+                    {
+                        Id = publication.Category.Id,
+                        Name = publication.Category.Name,
+                    },
+                    Lector = lectorForPublication,
+                    PublishingHouse = new PublishingHouseForPublicationViewModel
+                    {
+                        Id = publication.PublishingHouse.Id,
+                        Name = publication.PublishingHouse.Name,
+                    },
+                    PublicationType = new PublicationTypeForPublicationViewModel
+                    {
+                        Id = publication.PublicationType.Id,
+                        Name = publication.PublicationType.Name,
+                    },
+                    Format = new FormatForPublicationViewModel
+                    {
+                        Id = publication.Format.Id,
+                        Name = publication.Format.Name,
+                    },
+                    Borrower = borrowerForPublication,
+                };
+
+
+                publicationViewList.Add(publicationViewModel);
+            }
+
+            return publicationViewList;
         }
 
         // GET: api/Publication/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Publication>> GetPublication(int id)
+        public async Task<ActionResult<PublicationViewModel>> GetPublication(int id)
         {
             if (_context.Publication == null)
             {
@@ -42,7 +139,93 @@ namespace DigitalLibraryAPI.Controllers
                 return NotFound();
             }
 
-            return publication;
+            var publicationAuthorViewModels = new Collection<AuthorForPublicationViewModel>();
+            var publicationAuthors = publication.PublicationAuthors;
+            if (null != publicationAuthors)
+            {
+                foreach (var publicationAuthor in publicationAuthors.ToList())
+                {
+                    if (_context.Author == null)
+                    {
+                        continue;
+                    }
+
+                    var author = _context.Author.Find(publicationAuthor.IdAuthor);
+                    if (null == author)
+                    {
+                        continue;
+                    }
+
+                    var authorView = new AuthorForPublicationViewModel
+                    {
+                        Id = author.Id,
+                        Name = author.Name,
+                        Surname = author.Surname,
+                    };
+
+                    publicationAuthorViewModels.Add(authorView);
+                }
+            }
+
+            LectorForPublicationViewModel? lectorForPublication = null;
+            if (null != publication.Lector)
+            {
+                lectorForPublication = new LectorForPublicationViewModel
+                {
+                    Id = publication.Lector.Id,
+                    Name = publication.Lector.Name,
+                    Surname = publication.Lector.Surname,
+                };
+            }
+
+            BorrowerForPublicationViewModel? borrowerForPublication = null;
+            if (null != publication.Borrower)
+            {
+                borrowerForPublication = new BorrowerForPublicationViewModel
+                {
+                    Id = publication.Borrower.Id,
+                    Name = publication.Borrower.Name,
+                    Surname = publication.Borrower.Surname,
+                };
+            }
+
+            var publicationViewModel = new PublicationViewModel
+            {
+                Id = publication.Id,
+                IsActive = publication.IsActive,
+                CreatedDate = publication.CreatedDate,
+                ModifiedDate = publication.ModifiedDate,
+                Title = publication.Title,
+                Language = publication.Language,
+                Status = publication.Status,
+                PublicationYear = publication.PublicationYear,
+                Authors = publicationAuthorViewModels,
+                Category = new CategoryForPublicationViewModel
+                {
+                    Id = publication.Category.Id,
+                    Name = publication.Category.Name,
+                },
+                Lector = lectorForPublication,
+                PublishingHouse = new PublishingHouseForPublicationViewModel
+                {
+                    Id = publication.PublishingHouse.Id,
+                    Name = publication.PublishingHouse.Name,
+                },
+                PublicationType = new PublicationTypeForPublicationViewModel
+                {
+                    Id = publication.PublicationType.Id,
+                    Name = publication.PublicationType.Name,
+                },
+                Format = new FormatForPublicationViewModel
+                {
+                    Id = publication.Format.Id,
+                    Name = publication.Format.Name,
+                },
+                Borrower = borrowerForPublication,
+            };
+
+
+            return publicationViewModel;
         }
 
         // PUT: api/Publication/5
