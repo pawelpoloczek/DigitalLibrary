@@ -90,11 +90,11 @@
         <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Publication" Icon="icon_feed.png">
+    <FlyoutItem Title="Publication" Icon="publications.png">
         <ShellContent Route="PublicationPage" ContentTemplate="{DataTemplate localPublication:PublicationPage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Authors" Icon="icon_feed.png">
+    <FlyoutItem Title="Authors" Icon="authors.png">
         <ShellContent Route="AuthorPage" ContentTemplate="{DataTemplate localAuthor:AuthorPage}" />
     </FlyoutItem>
     

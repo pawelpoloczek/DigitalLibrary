@@ -10,12 +10,12 @@ using Xamarin.Forms;
 
 namespace DigitalLibrary.ViewModels.AuthorVM
 {
-    public class AuthorViewModel : AListViewModel<Author>
+    public class AuthorViewModel : AListViewModel<Service.Reference.AuthorViewModel>
     {
         public AuthorViewModel() : base("Author index!")
         {
         }
-        public async override void OnItemSelected(Author item)
+        public async override void OnItemSelected(Service.Reference.AuthorViewModel item)
         {
             if (item == null)
                 return;

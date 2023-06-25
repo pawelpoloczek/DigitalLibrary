@@ -4,7 +4,7 @@ using System;
 
 namespace DigitalLibrary.ViewModels.AuthorVM
 {
-    public class NewAuthorViewModel : ANewViewModel<Author>
+    public class NewAuthorViewModel : ANewViewModel<Service.Reference.AuthorViewModel>
     {
         #region Fields
         private string name;
@@ -32,9 +32,9 @@ namespace DigitalLibrary.ViewModels.AuthorVM
 
         public NewAuthorViewModel() : base() { }
 
-        public override Author SetItem()
+        public override Service.Reference.AuthorViewModel SetItem()
         {
-            return new Author
+            return new Service.Reference.AuthorViewModel
             {
                 Surname = this.Surname,
                 Name = this.Name,

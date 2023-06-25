@@ -136,7 +136,7 @@ namespace DigitalLibraryAPI.Controllers
 
         // PUT: api/Author/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAuthor(int id, AuthorAddViewModel author)
+        public async Task<IActionResult> PutAuthor(int id, AuthorViewModel author)
         {
             var authorEntity = await _context.Author.FindAsync(id);
             if (authorEntity == null)
@@ -173,7 +173,7 @@ namespace DigitalLibraryAPI.Controllers
 
         // POST: api/Author
         [HttpPost]
-        public async Task<ActionResult<AuthorAddViewModel>> PostAuthor(AuthorAddViewModel author)
+        public async Task<ActionResult<AuthorViewModel>> PostAuthor(AuthorViewModel author)
         {
             if (_context.Author == null)
             {

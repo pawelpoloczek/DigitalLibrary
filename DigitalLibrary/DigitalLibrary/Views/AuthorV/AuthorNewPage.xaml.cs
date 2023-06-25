@@ -7,7 +7,7 @@ namespace DigitalLibrary.Views.AuthorV
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AuthorNewPage : ContentPage
     {
-        public Service.Reference.Author Item { get; set; }
+        public Service.Reference.AuthorViewModel Item { get; set; }
         public AuthorNewPage()
         {
             InitializeComponent();

@@ -9,26 +9,27 @@ using System.Threading.Tasks;
 
 namespace DigitalLibrary.Services
 {
-    public class AuthorDataStore : AListDataStore<Author>
+    public class AuthorDataStore : AListDataStore<AuthorViewModel>
     {
         public AuthorDataStore() : base() { }
 
-        public override async Task<Author> AddItemToService(Author item)
+        public override async Task<AuthorViewModel> AddItemToService(AuthorViewModel item)
         {
+            //throw new NotImplementedException();
             return await _service.AuthorPOSTAsync(item);
         }
 
-        public override async Task<bool> DeleteItemFromService(Author item)
+        public override async Task<bool> DeleteItemFromService(AuthorViewModel item)
         {
             return await _service.AuthorDELETEAsync(item.Id).HandleRequest();
         }
 
-        public override async Task<Author> Find(Author item)
+        public override async Task<AuthorViewModel> Find(AuthorViewModel item)
         {
             return await _service.AuthorGETAsync(item.Id);
         }
 
-        public override async Task<Author> Find(int id)
+        public override async Task<AuthorViewModel> Find(int id)
         {
             return await _service.AuthorGETAsync(id);
         }
@@ -38,8 +39,9 @@ namespace DigitalLibrary.Services
             items = _service.AuthorAllAsync().Result.ToList();
         }
 
-        public override async Task<bool> UpdateItemInService(Author item)
+        public override async Task<bool> UpdateItemInService(AuthorViewModel item)
         {
+            //throw new NotImplementedException();
             return await _service.AuthorPUTAsync(item.Id, item).HandleRequest();
         }
     }

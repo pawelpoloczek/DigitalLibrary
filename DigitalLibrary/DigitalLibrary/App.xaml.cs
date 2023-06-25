@@ -22,6 +22,9 @@ namespace DigitalLibrary
             DependencyService.Register<LectorDataStore>();
             DependencyService.Register<BorrowerDataStore>();
             DependencyService.Register<AuthorDataStore>();
+            //DependencyService.Register<AuthorAddViewModelDataStore>();
+            DependencyService.Register<PublicationAddViewMocelStoreData>();
+            
             DependencyService.Register<PublicationDataStore>();
 
             MainPage = new AppShell();

@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DigitalLibrary.Views.PublicationV.PublicationDetailsPage"
+             xmlns:local="clr-namespace:DigitalLibrary.ViewModels.PublicationVM"
+             xmlns:model="clr-namespace:DigitalLibrary.Service.Reference"
              Shell.PresentationMode="ModalAnimated"
              Title="Details">
     <ContentPage.Content>
@@ -20,6 +22,37 @@
             <Label Text="{Binding CreatedDate, Mode=TwoWay}" FontSize="Medium" />
             <Label Text="Modified Date" FontSize="Medium" />
             <Label Text="{Binding ModifiedDate, Mode=TwoWay}" FontSize="Medium" />
+
+
+            <RefreshView x:DataType="local:PublicationDetailsViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+                <CollectionView x:Name="ItemsListView"
+                ItemsSource="{Binding Items}"
+                SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Padding="10" x:DataType="model:PublicationAuthor">
+                                <Label Text="{Binding IdAuthor}" 
+                            LineBreakMode="NoWrap" 
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            FontSize="12" />
+                                <Label Text="{Binding Author.Name}" 
+                            LineBreakMode="NoWrap" 
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            FontSize="16" />
+                                <!--<StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:MealDetailsViewModel}}, Path=ItemTapped}"		
+                                CommandParameter="{Binding .}">
+                                    </TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>-->
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+
+
             <StackLayout Orientation="Horizontal">
                 <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
                 <Button Text="Delete" Command="{Binding DeleteCommand}" HorizontalOptions="FillAndExpand"></Button>

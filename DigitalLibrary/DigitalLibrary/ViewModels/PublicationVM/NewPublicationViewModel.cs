@@ -3,11 +3,15 @@ using DigitalLibrary.Services;
 using DigitalLibrary.ViewModels.Abstract;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
+using Xamarin.Forms;
 
 namespace DigitalLibrary.ViewModels.PublicationVM
 {
-    public class NewPublicationViewModel : ANewViewModel<Publication>
+    public class NewPublicationViewModel : ANewViewModel<PublicationAddViewModel>, INotifyPropertyChanged
     {
         #region Fields
         private string title;
@@ -31,6 +35,9 @@ namespace DigitalLibrary.ViewModels.PublicationVM
 
         private List<Borrower> borrowers;
         private Borrower selectedBorrower;
+
+        private ObservableCollection<AuthorViewModel> authors;
+
 
         #endregion Fields
 
@@ -64,10 +71,7 @@ namespace DigitalLibrary.ViewModels.PublicationVM
 
         public List<Category> Categories
         {
-            get
-            {
-                return categories;
-            }
+            get { return categories; }
         }
 
         public Lector SelectedLector
@@ -78,10 +82,7 @@ namespace DigitalLibrary.ViewModels.PublicationVM
 
         public List<Lector> Lectors
         {
-            get 
-            { 
-                return lectors;
-            }
+            get { return lectors; }
         }
 
         public PublishingHouse SelectedPublishingHouse
@@ -129,6 +130,11 @@ namespace DigitalLibrary.ViewModels.PublicationVM
             get { return borrowers; }
         }
 
+        public ObservableCollection<AuthorViewModel> Authors
+        { 
+            get { return authors; } 
+        }
+
         #endregion Properties
 
         public NewPublicationViewModel() :base()
@@ -159,28 +165,89 @@ namespace DigitalLibrary.ViewModels.PublicationVM
             borrowerDataStore.RefreshListFromService();
             borrowers = borrowerDataStore.items;
 
+
+            var authorDataStore = new AuthorDataStore();
+            authorDataStore.RefreshListFromService();
+            
+            authors = new ObservableCollection<AuthorViewModel>();
+            foreach (var author in authorDataStore.items)
+            {
+                authors.Add(author);
+            }
+
+
         }
 
-        public override Publication SetItem()
+        private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            return new Publication
+            if (e.SelectedItem == null)
+                return;
+
+            
+            var selectedItem = e.SelectedItem;
+
+            
+            Console.WriteLine(selectedItem.ToString());
+
+            return;
+        }
+
+        public override PublicationAddViewModel SetItem()
+        {
+            var selectedAuthorsIds = new List<int>();
+
+            foreach (var item in (List<int>) SelectedIndices)
+            {
+                selectedAuthorsIds.Add(Authors[item].Id);
+            }
+
+           
+            return new PublicationAddViewModel
             {
                 Title = this.Title,
                 Language = this.Language,
                 Status = true,
-                IdCategory = SelectedCategory.Id,
-                IdLector = SelectedLector.Id,
-                IdPublicationType = SelectedPublicationType.Id,
-                IdFormat = SelectedFormat.Id,   
-                IdBorrower = SelectedBorrower.Id,
-                IdPublishingHouse = SelectedPublishingHouse.Id,
+                CategoryId = SelectedCategory.Id,
+                LectorId = SelectedLector.Id,
+                PublicationTypeId = SelectedPublicationType.Id,
+                FormatId = SelectedFormat.Id,
+                BorrowerId = SelectedBorrower.Id,
+                PublishingHouseId = SelectedPublishingHouse.Id,
+                AuthorIds = selectedAuthorsIds
             };
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void RaisePropertyChanged(String name)
+        {
+            if (PropertyChanged != null)
+                this.PropertyChanged(this, new PropertyChangedEventArgs(name));
         }
 
         public override bool ValidateSave()
         {
             return !String.IsNullOrEmpty(Title);
             //!String.IsNullOrEmpty(SelectedCategory?.Name);
+        }
+
+
+        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+
+        private object selectedIndices;
+        public object SelectedIndices
+        {
+            get { return selectedIndices; }
+            set
+            {
+                selectedIndices = value;
+                NotifyPropertyChanged("SelectedIndices");
+
+            }
         }
     }
 }

@@ -9,10 +9,10 @@ using Xamarin.Forms;
 
 namespace DigitalLibrary.ViewModels.PublicationVM
 {
-    public class PublicationViewModel : AListViewModel<Publication>
+    public class PublicationViewModel : AListViewModel<Service.Reference.PublicationViewModel>
     {
         public PublicationViewModel() : base("Publications") { }
-        public async override void OnItemSelected(Publication item)
+        public async override void OnItemSelected(Service.Reference.PublicationViewModel item)
         {
             if (item == null)
                 return;

@@ -142,4 +142,13 @@
       <Name>DigitalLibrary</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\book.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\publications.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\authors.png" />
+  </ItemGroup>
 </Project>

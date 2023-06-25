@@ -3,7 +3,7 @@ using DigitalLibrary.ViewModels.Abstract;
 
 namespace DigitalLibrary.ViewModels.AuthorVM
 {
-    public class AuthorDetailsViewModel: AItemDetailsViewModel<Author>
+    public class AuthorDetailsViewModel: AItemDetailsViewModel<Service.Reference.AuthorViewModel>
     {
         #region Fields
         private string name;
@@ -31,7 +31,7 @@ namespace DigitalLibrary.ViewModels.AuthorVM
 
         public AuthorDetailsViewModel() : base() { }
 
-        public override void LoadProperties(Author item)
+        public override void LoadProperties(Service.Reference.AuthorViewModel item)
         {
             Name = item.Name;
             Surname = item.Surname;
